@@ -1,13 +1,14 @@
 package com.pasynekmichal;
 
+import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootApplication
-public class NbpApiExchangeratesApplication {
+@SpringBootTest
+class NbpApiExchangeratesApplicationTests {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NbpApiExchangeratesApplication.class, args);
+	@Test
+	void contextLoads() {
 	}
-
 }

@@ -28,7 +28,7 @@ public class CurrencyService {
             double value = response[0].getRates().stream()
                     .filter(rate -> rate.getCode().equalsIgnoreCase(dto.getCurrency()))
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Waluta nieznaleziona"))
+                    .orElseThrow(() -> new IllegalArgumentException("Currency unknown"))
                     .getMid();
 
             Request request = new Request();
@@ -41,7 +41,7 @@ public class CurrencyService {
 
             return value;
         }
-        throw new IllegalArgumentException("Nie udało się pobrać danych z API NBP");
+        throw new IllegalArgumentException("Failed to download data from NBP API");
     }
 
     public List<Request> getAllRequests() {

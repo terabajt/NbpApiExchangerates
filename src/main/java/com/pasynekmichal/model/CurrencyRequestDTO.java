@@ -13,6 +13,11 @@ public class CurrencyRequestDTO {
     public CurrencyRequestDTO() {
     }
 
+    public CurrencyRequestDTO(String currency, String name) {
+        this.currency = currency;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
