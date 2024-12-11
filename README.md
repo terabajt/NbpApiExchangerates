@@ -3,6 +3,9 @@
 This project implements a RESTful application as part of a recruitment task. It interacts with the National Bank of Poland (NBP) API to fetch currency exchange rates, stores requests in a database, and exposes endpoints for retrieving and querying this data. The application is developed using Java, Spring Boot, Maven, and supports data persistence via a relational database.
 ![NBP API Exchangerates APP](https://raw.githubusercontent.com/terabajt/NbpApiExchangerates/refs/heads/main/media/NbpApiImage.gif)
 
+
+Front in Angular is available at [NbpApiExchangeratesFront](https://github.com/terabajt/NbpApiExchangeratesFront)
+
 ## Endpoint 1: Fetch Currency Value
 ### Path: POST /currencies/get-current-currency-value-command
 #### Description: Fetches the current exchange rate for a given currency using the NBP API.
