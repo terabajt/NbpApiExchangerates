@@ -21,6 +21,14 @@ public class Request {
 
     }
 
+    public Request(String currency, String name, LocalDateTime date, double currencyValue) {
+        this.currency = currency;
+        this.name = name;
+        this.date = date;
+        this.currencyValue = currencyValue;
+    }
+
+
     public Long getId() {
         return id;
     }
