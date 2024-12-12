@@ -1,6 +1,7 @@
 package com.pasynekmichal.service;
 
 import com.pasynekmichal.model.CurrencyRequestDTO;
+import com.pasynekmichal.model.NbpResponse;
 import com.pasynekmichal.model.Request;
 import com.pasynekmichal.repository.RequestRepository;
 import org.springframework.stereotype.Service;

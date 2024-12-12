@@ -1,5 +1,6 @@
 package com.pasynekmichal.service;
 
+import com.pasynekmichal.model.NbpResponse;
 import com.pasynekmichal.model.Rate;
 import org.junit.jupiter.api.Test;
 

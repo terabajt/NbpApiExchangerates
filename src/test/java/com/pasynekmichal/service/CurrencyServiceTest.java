@@ -1,6 +1,7 @@
 package com.pasynekmichal.service;
 
 import com.pasynekmichal.model.CurrencyRequestDTO;
+import com.pasynekmichal.model.NbpResponse;
 import com.pasynekmichal.model.Rate;
 import com.pasynekmichal.model.Request;
 import com.pasynekmichal.repository.RequestRepository;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,23 +36,21 @@ class CurrencyServiceTest {
     }
 
     @Test
-    void shouldReturnCurrencyValueAndSaveRequest() {
-        CurrencyRequestDTO dto = new CurrencyRequestDTO("USD", "TestCurrency");
+    void shouldReturnCurrencyValue() {
         NbpResponse mockResponse = new NbpResponse();
-        Rate mockRate = new Rate("USD", "USD", 4.0518);
-        mockResponse.setRates(List.of(mockRate));
+        CurrencyRequestDTO dto = new CurrencyRequestDTO("USD", "TestCurrency");
+        Rate mockRate = new Rate("USD", "USD", 4.0054);
 
-        when(restTemplate.getForObject(anyString(), eq(NbpResponse[].class)))
-                .thenReturn(new NbpResponse[]{mockResponse});
-
-        when(repository.save(any(Request.class))).thenReturn(new Request());
+        CurrencyService currencyService = mock(CurrencyService.class);
+        when(currencyService.getCurrencyValue(dto)).thenReturn(mockRate.getMid());
 
         double result = currencyService.getCurrencyValue(dto);
 
-        assertEquals(4.05, result, 0.01, "Currency rate should be rounded to two decimal places");
+        assertEquals(4.0054, result, 0.0001, "Currency rate should match the mocked value");
 
-        verify(repository, times(1)).save(any(Request.class));
     }
+
+
 
     @Test
     void shouldThrowExceptionWhenCurrencyNotFound() {

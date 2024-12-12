@@ -1,4 +1,4 @@
-import com.pasynekmichal.model.Rate;
+package com.pasynekmichal.model;
 
 import java.util.List;
 
