@@ -155,6 +155,18 @@ Handles database operations using Spring Data JPA.
 - Add authentication and authorization.
 - Support for multiple APIs for currency exchange rates.
 - Implement a caching layer to reduce API calls to the NBP API.
-- Add Docker support for easier deployment.
+
+### Docker
+To run docker use 
+
+```
+sudo docker build -t spring-docker-maven-app .
+```
+and 
+``` 
+docker run -p 8080:8080 spring-docker-maven-app
+```
+to run Docker on 8080 port.
+
 
 For questions or further information, contact me at michalpasynek@gmail.com.
