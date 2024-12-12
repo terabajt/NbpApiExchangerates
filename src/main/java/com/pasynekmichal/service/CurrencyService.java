@@ -4,6 +4,7 @@ import com.pasynekmichal.model.CurrencyRequestDTO;
 import com.pasynekmichal.model.NbpResponse;
 import com.pasynekmichal.model.Request;
 import com.pasynekmichal.repository.RequestRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,13 +17,20 @@ public class CurrencyService {
     private final RequestRepository repository;
     private final RestTemplate restTemplate;
 
+    @Value("${currency.api}")
+    private String currencyApiUrl;
+
+    public String getCurrencyApiUrl() {
+        return currencyApiUrl;
+    }
+
     public CurrencyService(RequestRepository repository) {
         this.repository = repository;
         this.restTemplate = new RestTemplate();
     }
 
     public double getCurrencyValue(CurrencyRequestDTO dto) {
-        String url = "http://api.nbp.pl/api/exchangerates/tables/A?format=json";
+        String url = getCurrencyApiUrl();
 
         NbpResponse[] response = restTemplate.getForObject(url, NbpResponse[].class);
         if (response != null && response.length > 0) {
