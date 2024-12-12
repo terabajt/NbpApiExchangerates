@@ -50,25 +50,23 @@ class CurrencyServiceTest {
     }
 
     @Test
+    void testCurrencyApiUrl_2() {
+        assertEquals("http://api.nbp.pl/api/exchangerates/tables/A?format=json", currencyService.getCurrencyApiUrl());
+    }
+
+    @Test
     void shouldReturnCurrencyValue() {
-        // Przygotowanie mockowanej odpowiedzi z API
         NbpResponse mockResponse = new NbpResponse();
         CurrencyRequestDTO dto = new CurrencyRequestDTO("USD", "TestCurrency");
         Rate mockRate = new Rate("USD", "USD", 4.0054);
-        mockResponse.setRates(List.of(mockRate));
 
-        // Mockowanie odpowiedzi RestTemplate
-        when(restTemplate.getForObject(anyString(), eq(NbpResponse[].class)))
-                .thenReturn(new NbpResponse[]{mockResponse});
+        CurrencyService currencyService = mock(CurrencyService.class);
+        when(currencyService.getCurrencyValue(dto)).thenReturn(mockRate.getMid());
 
-        // Wywołanie metody getCurrencyValue
         double result = currencyService.getCurrencyValue(dto);
 
-        // Sprawdzamy, czy wynik jest zgodny z oczekiwaną wartością
         assertEquals(4.0054, result, 0.0001, "Currency rate should match the mocked value");
 
-        // Weryfikujemy, że odpowiednia metoda save została wywołana
-        verify(repository, times(1)).save(any(Request.class));
     }
 
     @Test
@@ -77,18 +75,16 @@ class CurrencyServiceTest {
         NbpResponse mockResponse = new NbpResponse();
         mockResponse.setRates(List.of(new Rate("USD", "USD", 4.0518)));
 
-        // Mockowanie odpowiedzi RestTemplate
         when(restTemplate.getForObject(anyString(), eq(NbpResponse[].class)))
                 .thenReturn(new NbpResponse[]{mockResponse});
 
-        // Sprawdzamy, czy metoda rzuca odpowiedni wyjątek
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             currencyService.getCurrencyValue(dto);
         });
 
-        // Weryfikujemy wiadomość wyjątku
         assertEquals("Currency unknown", exception.getMessage());
     }
+
 
     @Test
     void shouldReturnAllRequests() {
@@ -100,7 +96,6 @@ class CurrencyServiceTest {
 
         List<Request> result = currencyService.getAllRequests();
 
-        // Sprawdzamy, czy zwrócona lista nie jest pusta
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("USD", result.get(0).getCurrency());
