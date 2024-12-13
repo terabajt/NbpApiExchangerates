@@ -156,6 +156,11 @@ Handles database operations using Spring Data JPA.
 - Support for multiple APIs for currency exchange rates.
 - Implement a caching layer to reduce API calls to the NBP API.
 
+### Postman Collections
+
+You can import the Postman collections (in JSON format) from the `/postman` directory (located in the root of the
+project) and use the built-in tests.
+
 ### Docker
 
 To run docker use
