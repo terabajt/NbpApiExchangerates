@@ -7,9 +7,12 @@ import com.pasynekmichal.model.Request;
 import com.pasynekmichal.repository.RequestRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -18,20 +21,35 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 class CurrencyServiceTest {
 
-    @Mock
+    @Value("${currency.api}")
+    private String currencyApiUrl;
+
+    @MockitoBean
     private RequestRepository repository;
 
     @Mock
     private RestTemplate restTemplate;
 
-    @InjectMocks
+    @Autowired
     private CurrencyService currencyService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+
+    }
+
+    @Test
+    void testCurrencyApiUrl() {
+        assertEquals("http://api.nbp.pl/api/exchangerates/tables/A?format=json", currencyApiUrl);
+    }
+
+    @Test
+    void testCurrencyApiUrl_2() {
+        assertEquals("http://api.nbp.pl/api/exchangerates/tables/A?format=json", currencyService.getCurrencyApiUrl());
     }
 
     @Test
@@ -57,14 +75,12 @@ class CurrencyServiceTest {
 
         when(restTemplate.getForObject(anyString(), eq(NbpResponse[].class)))
                 .thenReturn(new NbpResponse[]{mockResponse});
-
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             currencyService.getCurrencyValue(dto);
         });
 
         assertEquals("Currency unknown", exception.getMessage());
     }
-
 
     @Test
     void shouldReturnAllRequests() {
@@ -80,4 +96,5 @@ class CurrencyServiceTest {
         assertEquals(1, result.size());
         assertEquals("USD", result.get(0).getCurrency());
     }
+
 }
