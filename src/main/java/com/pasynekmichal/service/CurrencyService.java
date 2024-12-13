@@ -20,13 +20,13 @@ public class CurrencyService {
     @Value("${currency.api}")
     private String currencyApiUrl;
 
-    public String getCurrencyApiUrl() {
-        return currencyApiUrl;
-    }
-
     public CurrencyService(RequestRepository repository) {
         this.repository = repository;
         this.restTemplate = new RestTemplate();
+    }
+
+    public String getCurrencyApiUrl() {
+        return currencyApiUrl;
     }
 
     public double getCurrencyValue(CurrencyRequestDTO dto) {

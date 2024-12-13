@@ -1,142 +1,142 @@
 {
-	"info": {
-		"_postman_id": "18923095-d665-4cc0-847c-b588c611a231",
-		"name": "CurrencyController API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29959152",
-		"_collection_link": "https://test22-5444.postman.co/workspace/test-Workspace~fdd3433e-b1b8-4acb-a34c-fe1a1f9137b9/collection/29959152-18923095-d665-4cc0-847c-b588c611a231?action=share&source=collection_link&creator=29959152"
-	},
-	"item": [
-		{
-			"name": "Get All Requests",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/currencies/requests",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"currencies",
-						"requests"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Current Currency Value",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"pm.test(\"Response contains value\", function () {",
-							"    pm.response.to.have.jsonBody(\"value\");",
-							"});",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"currency\": \"USD\",\n    \"name\": \"John Doe\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/currencies/get-current-currency-value-command",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"currencies",
-						"get-current-currency-value-command"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Invalid Currency Request",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
-							"});",
-							"pm.test(\"Response contains validation error\", function () {",
-							"    const jsonData = pm.response.json();",
-							"    pm.expect(jsonData.error).to.not.be.undefined;",
-							"    pm.expect(jsonData.error).to.eql(\"Bad Request\");",
-							"});",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"currency\": \"US\",\n    \"name\": \"John Doe\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/currencies/get-current-currency-value-command",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"currencies",
-						"get-current-currency-value-command"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "18923095-d665-4cc0-847c-b588c611a231",
+    "name": "CurrencyController API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29959152",
+    "_collection_link": "https://test22-5444.postman.co/workspace/test-Workspace~fdd3433e-b1b8-4acb-a34c-fe1a1f9137b9/collection/29959152-18923095-d665-4cc0-847c-b588c611a231?action=share&source=collection_link&creator=29959152"
+  },
+  "item": [
+    {
+      "name": "Get All Requests",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/currencies/requests",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "currencies",
+            "requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Current Currency Value",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response contains value\", function () {",
+              "    pm.response.to.have.jsonBody(\"value\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"currency\": \"USD\",\n    \"name\": \"John Doe\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/currencies/get-current-currency-value-command",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "currencies",
+            "get-current-currency-value-command"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid Currency Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "pm.test(\"Response contains validation error\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.error).to.not.be.undefined;",
+              "    pm.expect(jsonData.error).to.eql(\"Bad Request\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"currency\": \"US\",\n    \"name\": \"John Doe\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/currencies/get-current-currency-value-command",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "currencies",
+            "get-current-currency-value-command"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }

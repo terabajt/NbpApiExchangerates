@@ -157,16 +157,19 @@ Handles database operations using Spring Data JPA.
 - Implement a caching layer to reduce API calls to the NBP API.
 
 ### Docker
-To run docker use 
+
+To run docker use
 
 ```
 sudo docker build -t spring-docker-maven-app .
 ```
-and 
+
+and
+
 ``` 
 docker run -p 8080:8080 spring-docker-maven-app
 ```
-to run Docker on 8080 port.
 
+to run Docker on 8080 port.
 
 For questions or further information, contact me at michalpasynek@gmail.com.
