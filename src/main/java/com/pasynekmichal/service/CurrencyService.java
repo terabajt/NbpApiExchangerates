@@ -35,14 +35,14 @@ public class CurrencyService {
         NbpResponse[] response = restTemplate.getForObject(url, NbpResponse[].class);
         if (response != null && response.length > 0) {
             double value = response[0].getRates().stream()
-                    .filter(rate -> rate.getCode().equalsIgnoreCase(dto.getCurrency()))
+                    .filter(rate -> rate.getCode().equalsIgnoreCase(dto.currency()))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("Currency unknown"))
                     .getMid();
 
             Request request = new Request();
-            request.setCurrency(dto.getCurrency());
-            request.setName(dto.getName());
+            request.setCurrency(dto.currency());
+            request.setName(dto.name());
             request.setDate(LocalDateTime.now());
             request.setValue(value);
 
